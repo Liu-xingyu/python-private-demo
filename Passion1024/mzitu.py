@@ -15,7 +15,7 @@ from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
 # 该函数用于下载图片
 # 传入函数： 网页的网址url
 def download_picture(url):
-    print(u'图片下载地址：', url)
+    # print(u'图片下载地址：', url)
     # 获取网页的源代码
     # r = requests.get(url)
     r = request(url, 'www.mzitu.com')
@@ -37,7 +37,7 @@ def download_picture(url):
         print(picture_name, u':%s' % picture_link)
         # urllib.request.urlretrieve(picture_link, 'E://meizitu/%s.jpg' % picture_name)
         # urllib.request.urlretrieve(picture_link, 'E://douban/%s.jpg' % picture_link[-9,-5], Schedule)
-        mkDir(picture_name, 'E:\\meizitu')
+        mkDir(picture_name, 'E:\\MeizituPictures')
         saveFile(picture_link)
 
 
@@ -58,8 +58,8 @@ c:远程文件的大小
 # 创建文件夹
 def mkDir(path, realIOPath):
     # realIOPath = "D:\portray001"
-    path = path.strip()
-    spath = path.encode('ISO-8859-1', 'ignore').decode('utf-8')
+    spath = path.strip()
+    # spath = path.encode('ISO-8859-1', 'ignore').decode('utf-8')
     isExists = os.path.exists(os.path.join(realIOPath, spath))
     if not isExists:
         print('建了一个名字叫做   ' + spath + '  的文件夹！')
@@ -67,7 +67,7 @@ def mkDir(path, realIOPath):
         os.chdir(os.path.join(realIOPath, spath))  # #切换到目录
         return True
     else:
-        print('名字叫做' + spath + '的文件夹已经存在了！')
+        # print('名字叫做' + spath + '的文件夹已经存在了！')
         return False
 
 
@@ -86,7 +86,7 @@ def saveFile(img_url):
 
 # 找到图片最中心模块地址
 def main():
-    for index in range(11,20):
+    for index in range(51, 70):
         url = 'https://www.mzitu.com/page/%d/' % index
         html = request(url, 'www.mzitu.com')
         page_urls = BeautifulSoup(html.text, 'lxml').find('div', class_='postlist').find_all('a')
@@ -104,7 +104,7 @@ def getMainPicUrls(url):
     # 全部10个网页
     # start_urls = ["https://movie.douban.com/top250"]
     start_urls = []
-    for i in range(1, 30):
+    for i in range(1, 65):
         # print(url+'/%d/' % i)
         start_urls.append(url + '/%d/' % i)
 
